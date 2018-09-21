@@ -26,9 +26,11 @@ fi
 # Load identities
 ssh-add -l &>/dev/null
 if (( ? == 1 )); then
-  if (( ${#zssh_ids} > 0 )); then
-    ssh-add "${HOME}/.ssh/${^zssh_ids[@]}" 2> /dev/null
+  local -a zssh_ids
+  zstyle -a ':zim:ssh' ids 'zssh_ids'
+  if (( ${#zssh_ids} )); then
+    ssh-add "${HOME}/.ssh/${^zssh_ids[@]}" 2>/dev/null
   else
-    ssh-add 2> /dev/null
+    ssh-add 2>/dev/null
   fi
 fi

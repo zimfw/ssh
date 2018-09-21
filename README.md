@@ -1,9 +1,12 @@
-SSH
+ssh
 ===
 
-Provides a convenient way to load ssh-agent. This enables one-time login and caching of SSH credentials per session.
+Provides a convenient way to load ssh-agent. This enables one-time login and
+caching of ssh credentials per session.
 
-.zimrc Configuration
---------------------
+Settings
+--------
 
-  * `zssh_ids=(id_rsa)` add any identities (from ~/.ssh) to this list to have them loaded and cached on login.
+To define the identities (from `~/.ssh`) to be loaded and cached on login, use:
+
+    zstyle ':zim:ssh' ids 'id_rsa1' 'id_rsa2' 'id_rsa3'
