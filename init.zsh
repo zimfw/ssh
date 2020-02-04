@@ -10,7 +10,7 @@
 
     # Load stored agent connection info
     local -r ssh_env=${HOME}/.ssh-agent
-    [[ -r ${ssh_env} ]] && source ${ssh_env} >/dev/null
+    if [[ -r ${ssh_env} ]] source ${ssh_env} >/dev/null
 
     ssh-add -l &>/dev/null
     if (( ? == 2 )); then
