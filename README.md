@@ -10,3 +10,5 @@ Settings
 To define the identities (from `~/.ssh`) to be loaded and cached on login, use:
 
     zstyle ':zim:ssh' ids 'id_rsa1' 'id_rsa2' 'id_rsa3'
+
+in `~/.zshrc` before where the module is initialized.
