@@ -19,6 +19,13 @@ the agent the first time they're used:
     Host *
       AddKeysToAgent yes
 
+ssh only automatically loads the keys with default names, like `~/.ssh/id_ed25519`
+or `~/.ssh/id_rsa`. Keys with other names need an `IdentityFile` line for the
+hosts they're used with, for example:
+
+    Host gitlab.com
+      IdentityFile ~/.ssh/gitlab_com_rsa
+
 ### macOS
 
 Besides `AddKeysToAgent yes`, also add `UseKeychain yes` under `Host *` in your
