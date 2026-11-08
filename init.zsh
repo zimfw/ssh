@@ -14,9 +14,21 @@
 
     ssh-add -l &>/dev/null
     if (( ? == 2 )); then
+      # Look for agent socket from systemd user unit
+      local ssh_sock
+      if [[ -n ${XDG_RUNTIME_DIR} && -S ${XDG_RUNTIME_DIR}/ssh-agent.socket ]]; then
+        ssh_sock=${XDG_RUNTIME_DIR}/ssh-agent.socket
+        SSH_AUTH_SOCK=${ssh_sock} ssh-add -l &>/dev/null
+        if (( ? == 2 )) ssh_sock=
+      fi
+      if [[ -n ${ssh_sock} ]]; then
+        export SSH_AUTH_SOCK=${ssh_sock}
+        unset SSH_AGENT_PID
+      else
         # Start agent and store agent connection info
-        (umask 066; ssh-agent >! ${ssh_env})
+        (umask 066; ssh-agent -s >! ${ssh_env})
         source ${ssh_env} >/dev/null
+      fi
     fi
   fi
 
